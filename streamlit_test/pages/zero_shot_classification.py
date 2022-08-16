@@ -126,7 +126,7 @@ with st.expander('View results...'):
 	col2.metric("Negativity", str(negative) + '%')
 	col3.metric("Neutrality", str(neutral) + '%')
 	
-	with st.expander('Show raw output...'):
+	if st.checkbox('Show raw output...'):
 		st.write(classification)
 	
 	
@@ -144,7 +144,5 @@ with st.expander('View results...'):
 	
 	st.write(f'Most likely: {classification_labels[np.argmax(hist)]}')
 	
-	with st.expander('Show raw output...'):
+	if st.checkbox('Show raw output...'):
 		st.write(classification)
-	
-	st.write('#### Expected weighted risk')
