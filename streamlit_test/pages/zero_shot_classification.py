@@ -56,7 +56,7 @@ classification_labels = st.multiselect(
 		'drug abuse',
 	],
 	[
-		'self halm',
+		'self harm',
 		'physical abuse',
 		'sexual abuse',
 		'feeling unsafe',
