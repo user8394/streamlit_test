@@ -119,13 +119,16 @@ classification = cls(sentence, classification_labels)
 st.write('[+] Done ✅')
 
 
-st.write('#### Sentiment Distribution')
+print(classification)
+print(sentiment)
 
-st.bar_chart({'data': sentiment})
+#st.write('#### Sentiment Distribution')
 
-st.write('#### Classificaiton Distribution')
+#st.bar_chart({'data': sentiment})
 
-st.bar_chart({'data': classification['scores']})
+#st.write('#### Classificaiton Distribution')
+
+#st.bar_chart({'data': classification['scores']})
 
 
 # # Add histogram data
