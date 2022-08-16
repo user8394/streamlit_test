@@ -33,6 +33,11 @@ with st.expander('More information...'):
 	''')
 
 with st.spinner('🧠 Loading NLI model (`valhalla/distilbart-mnli-12-1`)...'):
+	try:
+		del cls
+	except:
+		pass
+	
 	cls = pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
 
 st.success('Done ✅')
