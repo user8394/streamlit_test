@@ -4,7 +4,8 @@ import plotly.figure_factory as ff
 import numpy as np
 
 
-col1, col2 = st.columns(2)
+#col1, col2 = st.columns(2)
+col1 = st
 
 st.title('Zero Shot Classification Model 🔮')
 
