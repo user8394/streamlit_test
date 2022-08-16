@@ -144,5 +144,5 @@ with st.expander('View results...'):
 	
 	st.write(f'Most likely: {classification_labels[np.argmax(hist)]}')
 	
-	if st.checkbox('Show raw output...'):
+	if st.checkbox('Show raw output... '):
 		st.write(classification)
