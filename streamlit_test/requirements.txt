@@ -2,3 +2,5 @@ transformers
 torch
 plotly==5.10.0
 scipy
+spacy
+spacytextblog
