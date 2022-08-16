@@ -2,4 +2,4 @@ transformers
 torch
 scipy
 spacy
-spacytextblog
+spacytextblob
