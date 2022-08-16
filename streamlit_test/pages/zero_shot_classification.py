@@ -33,12 +33,10 @@ with st.expander('More information...'):
 	specific labels. Have fun 🤗!
 	''')
 
+with st.spinner('🧠 Loading NLI model (`valhalla/distilbart-mnli-12-1`)...'):
+	zero_shot_classifier = pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
 
-st.write('🧠 Loading model (valhalla/distilbart-mnli-12-1)...')
-
-zero_shot_classifier = pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
-
-st.write('Done ✅')
+st.success('Done ✅')
 
 
 class ZeroShotClassification:
@@ -108,49 +106,45 @@ sentence = st.text_area('Input text...', '''
 I feel unhappy :(
      ''')
 
-st.write('[+] Performing sentiment analysis...')
-	 
+st.write('Analysing...')
+
+prog = st.progress(0)
+
 sentiment = cls(sentence, ['positive', 'negative', 'neutral'])
 
-st.write('[+] Performing zero shot classification...')
+prog.progress(1)
 
 classification = cls(sentence, classification_labels)
+
+prog.progress(2)
 	 
 st.write('[+] Done ✅')
 
+st.success('Analysis complete!')
+
+with st.expander('View results...'):
+	
+	st.write('#### 1. Sentiment Analysis')
+	
+	positive = sentiment['scores'][sentiment['labels'].index('positive')]
+	negative = sentiment['scores'][sentiment['labels'].index('negative')]
+	neutral = sentiment['scores'][sentiment['labels'].index('neutral')]
+
+	col1, col2, col3 = st.columns(3)
+	col1.metric("Positivity", str(positive))
+	col2.metric("Negative", str(negative))
+	col3.metric("Neutral", str(neutral))
 
 
+	st.write('#### 2. Zero Shot Classification')
 
-st.write('#### Sentiment Analysis Results')
+	hist = []
 
-st.write(sentiment)
+	for label in classification_labels:
+		score = classification['scores'][classification['labels'].index(label)]
+		hist.append(score)
 
-
-st.write('#### Classificaiton Distribution')
-
-hist = []
-
-for label in classification_labels:
-	score = classification['scores'][classification['labels'].index(label)]
-	hist.append(score)
-
-st.bar_chart({'data': hist})
-
-
-# # Add histogram data
-# x1 = np.random.randn(200) - 2
-# x2 = np.random.randn(200)
-# x3 = np.random.randn(200) + 2
-
-# # Group data together
-# hist_data = [x1, x2, x3]
-
-# group_labels = ['Group 1', 'Group 2', 'Group 3']
-
-# # Create distplot with custom bin_size
-# fig = ff.create_distplot(
-#          hist_data, group_labels, bin_size=[.1, .25, .5])
-
-# # Plot!
-# st.plotly_chart(fig, use_container_width=True)
-
+	st.bar_chart({'data': hist})
+	
+	st.write('Raw output:')
+	st.write(classification)
