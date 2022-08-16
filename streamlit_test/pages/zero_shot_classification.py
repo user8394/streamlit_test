@@ -5,36 +5,35 @@ import numpy as np
 
 
 #col1, col2 = st.columns(2)
-col1 = st
 
 st.title('Zero Shot Classification Model 🔮')
 
-col1.write('''
+st.write('''
 
-## About
+### About
 
 This model uses a pretrained NLI pipeline to classify a sentence amoung a set of given labels. This can be directly applied to the problem of flagging safe-guarding issues 
 by providing a number of short safe guarding labels such as "physical abuse" or "self harm." For each label, the model assigns a score between 0 and 1 representing how 
 confident it is that a given sentence falls into that category. 
 
-## Advantages
+### 👍 Advantages
 
 The `zero-shot-classification` pipeline leverages a LLM giving it a good understanding of contextual cues and implicit meanings of sentences. Labels can be added 
 or removed with any additional training, meaning the system can be maintained easily. 
 
-## Disadvantages
+### 👎 Disadvantages
 
 The model is rather large at ~999MB so can't be easily run on limited hardware. However this shouldn't be a problem when deploying to cloud providers like GCP.
 
 
-## Usage
+### 💻 Usage
 
 To test out the model, simply enter a sentence and press "classify." The model whill produce a distribution over the predicted label. You can also edit the 
 specific labels. Have fun 🤗!
 ''')
 
 
-col2.write('🧠 Loading model (valhalla/distilbart-mnli-12-1)...')
+st.write('🧠 Loading model (valhalla/distilbart-mnli-12-1)...')
 
 
 zero_shot_classifier = pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
@@ -76,10 +75,10 @@ class ZeroShotClassification:
   
  
 cls =  ZeroShotClassification(zero_shot_classifier)
-col2.write('Done ✅')
+st.write('Done ✅')
 
 
-classification_labels = col2.multiselect(
+classification_labels = st.multiselect(
      'Chosen classification labels...',
 	[
 		'self harm',
@@ -104,19 +103,19 @@ classification_labels = col2.multiselect(
 	]
 )
 
-sentence = col2.text_area('Input text...', '''
+sentence = st.text_area('Input text...', '''
 I feel unhappy :(
      ''')
 
-col2.write('[+] Performing sentiment analysis...')
+st.write('[+] Performing sentiment analysis...')
 	 
 sentiment = cls(sentence, ['positive', 'negative', 'neutral'])
 
-col2.write('[+] Performing zero shot classification...')
+st.write('[+] Performing zero shot classification...')
 
 classification = cls(sentence, classification_labels)
 	 
-col2.write('[+] Done ✅')
+st.write('[+] Done ✅')
 
 
 st.write('### Predicted Sentiment')
