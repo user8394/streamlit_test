@@ -34,48 +34,10 @@ with st.expander('More information...'):
 	''')
 
 with st.spinner('🧠 Loading NLI model (`valhalla/distilbart-mnli-12-1`)...'):
-	zero_shot_classifier = pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
+	cls = pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
 
 st.success('Done ✅')
-
-
-class ZeroShotClassification:
-
-	def __init__(self, classifier=None):
-		self.classifier = classifier or pipeline('zero-shot-classification')
-
-
-	def __call__(self, *args):
-		return self.predict(*args)
-
-
-	def get_label_score(self, sentence, label, labels):
-
-		result = self.classifier(sentence, labels)
-		label_index = result['labels'].index(label)
-		label_score = result['scores'][label_index]
-
-		return label_score
-
-
-	def predict(self, sentence, labels):
-
-		# negativity_score = self.get_label_score(sentence, 'negative', [
-		# 	'negative',
-		# 	'positive',
-		# 	'neutral',
-		# ])
-
-
-		# if negativity_score < 0.7:
-		# 	return (False, None)
-
-
-		return self.classifier(sentence, labels)
   
- 
-cls =  ZeroShotClassification(zero_shot_classifier)
-
 
 classification_labels = st.multiselect(
      'Chosen classification labels...',
@@ -91,13 +53,15 @@ classification_labels = st.multiselect(
 		'other',
 		'bullying',
 		'addiction',
+		'drug abuse',
 	],
 	[
-		'depression',
-		'violence',
+		'self halm',
 		'physical abuse',
 		'sexual abuse',
 		'feeling unsafe',
+		'addiction',
+		'depression',
 		'other',
 	]
 )
