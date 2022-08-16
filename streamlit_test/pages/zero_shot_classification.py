@@ -115,7 +115,7 @@ st.success('Analysis complete ✅')
 
 with st.expander('View results...'):
 	
-	st.write('#### 1. Sentiment Analysis')
+	st.write('#### ❤ Sentiment Analysis')
 	
 	positive = int(sentiment['scores'][sentiment['labels'].index('positive')] * 100)
 	negative = int(sentiment['scores'][sentiment['labels'].index('negative')] * 100)
@@ -123,11 +123,16 @@ with st.expander('View results...'):
 
 	col1, col2, col3 = st.columns(3)
 	col1.metric("Positivity", str(positive) + '%')
-	col2.metric("Negative", str(negative) + '%')
-	col3.metric("Neutral", str(neutral) + '%')
+	col2.metric("Negativity", str(negative) + '%')
+	col3.metric("Neutrality", str(neutral) + '%')
+	
+	with st.expander('Show raw output...'):
+		st.write(classification)
+	
+	
+	st.write('---')
 
-
-	st.write('#### 2. Zero Shot Classification')
+	st.write('#### ⚖ Zero Shot Classification')
 
 	hist = []
 
@@ -137,5 +142,9 @@ with st.expander('View results...'):
 
 	st.bar_chart({'data': hist})
 	
-	st.write('Raw output:')
-	st.write(classification)
+	st.write(f'Most likely: {classification_labels[np.argmax(hist)]}')
+	
+	with st.expander('Show raw output...'):
+		st.write(classification)
+	
+	st.write('#### Expected weighted risk')
