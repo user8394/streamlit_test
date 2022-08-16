@@ -1,6 +1,5 @@
 import streamlit as st
 from transformers import pipeline
-import plotly.figure_factory as ff
 import numpy as np
 
 
