@@ -9,32 +9,32 @@ import numpy as np
 st.title('Zero Shot Classification Model 🔮')
 
 st.write('''
-
-### About
-
 This model uses a pretrained NLI pipeline to classify a sentence amoung a set of given labels. This can be directly applied to the problem of flagging safe-guarding issues 
 by providing a number of short safe guarding labels such as "physical abuse" or "self harm." For each label, the model assigns a score between 0 and 1 representing how 
 confident it is that a given sentence falls into that category. 
-
-### 👍 Advantages
-
-The `zero-shot-classification` pipeline leverages a LLM giving it a good understanding of contextual cues and implicit meanings of sentences. Labels can be added 
-or removed with any additional training, meaning the system can be maintained easily. 
-
-### 👎 Disadvantages
-
-The model is rather large at ~999MB so can't be easily run on limited hardware. However this shouldn't be a problem when deploying to cloud providers like GCP.
-
-
-### 💻 Usage
-
-To test out the model, simply enter a sentence and press "classify." The model whill produce a distribution over the predicted label. You can also edit the 
-specific labels. Have fun 🤗!
 ''')
+
+with st.expander('More information...'):
+	
+	st.write('''
+	### Advantages
+
+	The `zero-shot-classification` pipeline leverages a LLM giving it a good understanding of contextual cues and implicit meanings of sentences. Labels can be added 
+	or removed with any additional training, meaning the system can be maintained easily. 
+
+	### Disadvantages
+
+	The model is rather large at ~999MB so can't be easily run on limited hardware. However this shouldn't be a problem when deploying to cloud providers like GCP.
+
+
+	### 💻 Usage
+
+	To test out the model, simply enter a sentence and press "classify." The model whill produce a distribution over the predicted label. You can also edit the 
+	specific labels. Have fun 🤗!
+	''')
 
 
 st.write('🧠 Loading model (valhalla/distilbart-mnli-12-1)...')
-
 
 zero_shot_classifier = pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
 
@@ -119,23 +119,29 @@ classification = cls(sentence, classification_labels)
 st.write('[+] Done ✅')
 
 
-st.write('### Predicted Sentiment')
+st.write('#### Sentiment Distribution')
+
+st.bar_chart({'data': sentiment})
+
+st.write('#### Classificaiton Distribution')
+
+st.bar_chart({'data': classification['scores']})
 
 
-# Add histogram data
-x1 = np.random.randn(200) - 2
-x2 = np.random.randn(200)
-x3 = np.random.randn(200) + 2
+# # Add histogram data
+# x1 = np.random.randn(200) - 2
+# x2 = np.random.randn(200)
+# x3 = np.random.randn(200) + 2
 
-# Group data together
-hist_data = [x1, x2, x3]
+# # Group data together
+# hist_data = [x1, x2, x3]
 
-group_labels = ['Group 1', 'Group 2', 'Group 3']
+# group_labels = ['Group 1', 'Group 2', 'Group 3']
 
-# Create distplot with custom bin_size
-fig = ff.create_distplot(
-         hist_data, group_labels, bin_size=[.1, .25, .5])
+# # Create distplot with custom bin_size
+# fig = ff.create_distplot(
+#          hist_data, group_labels, bin_size=[.1, .25, .5])
 
-# Plot!
-st.plotly_chart(fig, use_container_width=True)
+# # Plot!
+# st.plotly_chart(fig, use_container_width=True)
 
