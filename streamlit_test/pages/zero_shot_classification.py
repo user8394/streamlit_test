@@ -73,14 +73,8 @@ class ZeroShotClassification:
 		return self.classifier(sentence, labels)
   
  
-
+cls =  ZeroShotClassification(zero_shot_classifier)
 st.write('Done ✅')
-
-@st.cache
-def create_model():
-	return ZeroShotClassification(zero_shot_classifier)
-
-cls = create_model()
 
 
 classification_labels = st.multiselect(
