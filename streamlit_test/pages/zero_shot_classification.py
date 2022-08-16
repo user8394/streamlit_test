@@ -38,6 +38,8 @@ st.write('🧠 Loading model (valhalla/distilbart-mnli-12-1)...')
 
 zero_shot_classifier = pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
 
+st.write('Done ✅')
+
 
 class ZeroShotClassification:
 
@@ -75,7 +77,6 @@ class ZeroShotClassification:
   
  
 cls =  ZeroShotClassification(zero_shot_classifier)
-st.write('Done ✅')
 
 
 classification_labels = st.multiselect(
