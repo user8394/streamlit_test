@@ -10,6 +10,6 @@ st.title('Test app page 2')
 
 st.write('Loading model...')
 
-model = load_pipeline('zero-shot-classification')
+#model = load_pipeline('zero-shot-classification')
 
 st.write('Done ✅')
