@@ -106,7 +106,7 @@ sentence = st.text_area('Input text...', '''
 I feel unhappy :(
      ''')
 
-st.spinner('Analysing...'):
+with st.spinner('Analysing...'):
 
 	sentiment = cls(sentence, ['positive', 'negative', 'neutral'])
 	classification = cls(sentence, classification_labels)
