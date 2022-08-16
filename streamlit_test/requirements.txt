@@ -1,5 +1,4 @@
 transformers
 torch
-scipy
 spacy
 spacytextblob
