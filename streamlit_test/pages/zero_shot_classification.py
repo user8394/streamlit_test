@@ -77,7 +77,7 @@ with st.spinner('Analysing...'):
 
 st.success('Analysis complete ✅')
 
-with st.expander('View results...'):
+with st.expander('View results summary...'):
 	
 	st.write('#### ❤ Sentiment Analysis')
 	
@@ -89,9 +89,6 @@ with st.expander('View results...'):
 	col1.metric("Positivity", str(positive) + '%')
 	col2.metric("Negativity", str(negative) + '%')
 	col3.metric("Neutrality", str(neutral) + '%')
-	
-	if st.checkbox('Show raw output...'):
-		st.write(classification)
 	
 	
 	st.write('---')
@@ -108,5 +105,10 @@ with st.expander('View results...'):
 	
 	st.write(f'Most likely: {classification_labels[np.argmax(hist)]}')
 	
-	if st.checkbox('Show raw output... '):
-		st.write(classification)
+
+with st.expander('View raw output...'):
+		
+	st.write('sentiment_analysis: ')
+	st.write(sentiment)
+	st.write('zero_shot_classification: ')
+	st.write(classification)
