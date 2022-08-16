@@ -4,10 +4,11 @@ import plotly.figure_factory as ff
 import numpy as np
 
 
+col1, col2 = st.columns(2)
 
 st.title('Zero Shot Classification Model 🔮')
 
-st.write('''
+col1.write('''
 
 ## About
 
@@ -32,7 +33,7 @@ specific labels. Have fun 🤗!
 ''')
 
 
-st.write('🧠 Loading model (valhalla/distilbart-mnli-12-1)...')
+col2.write('🧠 Loading model (valhalla/distilbart-mnli-12-1)...')
 
 
 zero_shot_classifier = pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
@@ -74,10 +75,10 @@ class ZeroShotClassification:
   
  
 cls =  ZeroShotClassification(zero_shot_classifier)
-st.write('Done ✅')
+col2.write('Done ✅')
 
 
-classification_labels = st.multiselect(
+classification_labels = col2.multiselect(
      'Chosen classification labels...',
 	[
 		'self harm',
@@ -102,19 +103,38 @@ classification_labels = st.multiselect(
 	]
 )
 
-sentence = st.text_area('Input text...', '''
+sentence = col2.text_area('Input text...', '''
 I feel unhappy :(
      ''')
 
-st.write('[+] Performing sentiment analysis...')
+col2.write('[+] Performing sentiment analysis...')
 	 
 sentiment = cls(sentence, ['positive', 'negative', 'neutral'])
 
-st.write('[+] Performing zero shot classification...')
+col2.write('[+] Performing zero shot classification...')
 
 classification = cls(sentence, classification_labels)
 	 
-st.write('[+] Done ✅')
+col2.write('[+] Done ✅')
 
-st.write(sentiment)
-st.write(classification)
+
+st.write('### Predicted Sentiment')
+
+
+# Add histogram data
+x1 = np.random.randn(200) - 2
+x2 = np.random.randn(200)
+x3 = np.random.randn(200) + 2
+
+# Group data together
+hist_data = [x1, x2, x3]
+
+group_labels = ['Group 1', 'Group 2', 'Group 3']
+
+# Create distplot with custom bin_size
+fig = ff.create_distplot(
+         hist_data, group_labels, bin_size=[.1, .25, .5])
+
+# Plot!
+st.plotly_chart(fig, use_container_width=True)
+
