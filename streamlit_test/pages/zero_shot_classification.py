@@ -121,13 +121,20 @@ st.write('[+] Done ✅')
 
 
 
-# st.write('#### Sentiment Distribution')
+st.write('#### Sentiment Analysis Results')
 
-# st.bar_chart({'data': list(sentiment)})
+st.write(sentiment)
+
 
 st.write('#### Classificaiton Distribution')
 
-st.bar_chart({'data': list(classification['scores'])})
+hist = []
+
+for label in classification_labels:
+	score = classification['scores'][classification['labels'].index(label)]
+	hist.append(score)
+
+st.bar_chart({'data': hist})
 
 
 # # Add histogram data
