@@ -10,7 +10,7 @@ st.title('Test app page 2')
 
 st.write('Loading model...')
 
-zero_shot_classifier = load_pipeline('zero-shot-classification')
+zero_shot_classifier = load_pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
 
 
 class ZeroShotClassification:
