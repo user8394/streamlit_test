@@ -1,7 +1,7 @@
 import streamlit as st
 from transformers import pipeline
 
-load_pipeline = st.cache(pipeline)
+#load_pipeline = st.cache(pipeline)
 
 
 
@@ -10,7 +10,7 @@ st.title('Test app page 2')
 
 st.write('Loading model...')
 
-zero_shot_classifier = load_pipeline('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
+zero_shot_classifier = pipelime('zero-shot-classification', model='valhalla/distilbart-mnli-12-1')
 
 
 class ZeroShotClassification:
