@@ -106,34 +106,25 @@ sentence = st.text_area('Input text...', '''
 I feel unhappy :(
      ''')
 
-st.write('Analysing...')
+st.spinner('Analysing...'):
 
-prog = st.progress(0)
+	sentiment = cls(sentence, ['positive', 'negative', 'neutral'])
+	classification = cls(sentence, classification_labels)
 
-sentiment = cls(sentence, ['positive', 'negative', 'neutral'])
-
-prog.progress(1)
-
-classification = cls(sentence, classification_labels)
-
-prog.progress(2)
-	 
-st.write('[+] Done ✅')
-
-st.success('Analysis complete!')
+st.success('Analysis complete ✅')
 
 with st.expander('View results...'):
 	
 	st.write('#### 1. Sentiment Analysis')
 	
-	positive = sentiment['scores'][sentiment['labels'].index('positive')]
-	negative = sentiment['scores'][sentiment['labels'].index('negative')]
-	neutral = sentiment['scores'][sentiment['labels'].index('neutral')]
+	positive = int(sentiment['scores'][sentiment['labels'].index('positive')] * 100)
+	negative = int(sentiment['scores'][sentiment['labels'].index('negative')] * 100)
+	neutral = int(sentiment['scores'][sentiment['labels'].index('neutral')] * 100)
 
 	col1, col2, col3 = st.columns(3)
-	col1.metric("Positivity", str(positive))
-	col2.metric("Negative", str(negative))
-	col3.metric("Neutral", str(neutral))
+	col1.metric("Positivity", str(positive) + '%')
+	col2.metric("Negative", str(negative) + '%')
+	col3.metric("Neutral", str(neutral) + '%')
 
 
 	st.write('#### 2. Zero Shot Classification')
