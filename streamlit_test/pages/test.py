@@ -59,6 +59,6 @@ class ZeroShotClassification:
 
 st.write('Done ✅')
 
-cls = ZeroShotClassifier(zero_shot_classifier)
+cls = ZeroShotClassification(zero_shot_classifier)
 
 st.write(cls('I want to hurt myself'))
